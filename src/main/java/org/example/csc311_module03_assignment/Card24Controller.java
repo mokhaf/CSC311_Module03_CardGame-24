@@ -13,6 +13,12 @@ public class Card24Controller {
     @FXML
     private TextField expressionField;
 
+    @FXML private ImageView card1Image;
+    @FXML private ImageView card2Image;
+    @FXML private ImageView card3Image;
+    @FXML private ImageView card4Image;
+
+
     // Variables
     private int[] cards = new int[4];
 
@@ -27,18 +33,19 @@ public class Card24Controller {
         for (int i = 0; i < 4; i++) {
             cards[i] = rand.nextInt(13) + 1;
         }
-        cardLabel.setText("Cards: " + getCardName(cards[0]) + ", " + getCardName(cards[1]) + ", " + getCardName(cards[2]) + ", " + getCardName(cards[3]));
+        updateCardImages();
     }
 
-    @FXML
-    private String getCardName(int value) {
-        return switch (value) {
-            case 1 -> "Ace";
-            case 11 -> "Jack";
-            case 12 -> "Queen";
-            case 13 -> "King";
-            default -> String.valueOf(value);
-        };
+    private void updateCardImages() {
+        card1Image.setImage(getCardImage(cards[0]));
+        card2Image.setImage(getCardImage(cards[1]));
+        card3Image.setImage(getCardImage(cards[2]));
+        card4Image.setImage(getCardImage(cards[3]));
+    }
+
+    private Image getCardImage(int value) {
+        String imagePath = "/cards/" + value + ".png";  // Example: "/cards/5.png"
+        return new Image(getClass().getResourceAsStream(imagePath));
     }
 
     @FXML
@@ -53,18 +60,6 @@ public class Card24Controller {
         } catch (Exception e) {
             showAlert("Error", "Invalid mathematical expression.");
         }
-    }
-
-    private boolean isValidExpression(String input) {
-        int count = 0;
-        for (int card : cards) {
-            String cardStr = String.valueOf(card);
-            if (input.contains(cardStr)) {
-                count++;
-                input = input.replaceFirst(cardStr, "");
-            }
-        }
-        return count == 4;
     }
 
     private int evaluateExpression(String expr) throws Exception {
