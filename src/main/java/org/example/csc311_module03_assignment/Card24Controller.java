@@ -27,7 +27,18 @@ public class Card24Controller {
         for (int i = 0; i < 4; i++) {
             cards[i] = rand.nextInt(13) + 1;
         }
-        cardLabel.setText("Cards: " + cards[0] + ", " + cards[1] + ", " + cards[2] + ", " + cards[3]);
+        cardLabel.setText("Cards: " + getCardName(cards[0]) + ", " + getCardName(cards[1]) + ", " + getCardName(cards[2]) + ", " + getCardName(cards[3]));
+    }
+
+    @FXML
+    private String getCardName(int value) {
+        return switch (value) {
+            case 1 -> "Ace";
+            case 11 -> "Jack";
+            case 12 -> "Queen";
+            case 13 -> "King";
+            default -> String.valueOf(value);
+        };
     }
 
     @FXML

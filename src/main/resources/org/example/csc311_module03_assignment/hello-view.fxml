@@ -11,6 +11,11 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Label text="Card 24 Game"/>
+    <Label fx:id="cardLabel" text="Cards: "/>
+
+    <TextField fx:id="expressionField" promptText="Enter expression"/>
+
+    <Button text="Verify" onAction="#verifyExpression"/>
+    <Button text="Refresh" onAction="#generateNewCards"/>
 </VBox>
